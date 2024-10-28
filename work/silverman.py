@@ -5,7 +5,7 @@ from kivy.uix.button import Button
 from kivy.graphics import Color, Rectangle, InstructionGroup
 from progs.texts import Start, Info
 from work.questions import Questions
-
+from kivy.uix.image import Image
 
 class Silverman(App):
     """
@@ -13,6 +13,9 @@ class Silverman(App):
     контролирующий логику интерфейса и навигацию между экранами.
     """
     def build(self): #Создает основное окно с виджетами.
+        self.score = 0
+        self.current_question = 0
+
         self.layout = BoxLayout(orientation='vertical')        
 
         # Установка фона
@@ -21,8 +24,11 @@ class Silverman(App):
             self.rect = Rectangle(size=self.layout.size, pos=self.layout.pos)
 
         self.layout.bind(size=self._update_rect, pos=self._update_rect)
-        self.score = 0
-        self.current_question = 0
+
+        img = Image(source='images/neon.png', size_hint=(None, None), size=(100, 100))
+        img.pos_hint = {'right': 1, 'top': 1}  # Позиционирование в верхнем углу
+        self.layout.add_widget(img)  # Добавляем изображение в макет
+
         self.label = Label(text=Start().greet(), 
                font_size = '25sp',)
         self.layout.add_widget(self.label)
