@@ -1,0 +1,99 @@
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.graphics import Color, Rectangle, InstructionGroup
+from progs.texts import Start, Info
+from work.questions import Questions
+
+
+class Silverman(App):
+    """
+    Основной класс приложения Silverman, 
+    контролирующий логику интерфейса и навигацию между экранами.
+    """
+    def build(self): #Создает основное окно с виджетами.
+        self.layout = BoxLayout(orientation='vertical')        
+
+        # Установка фона
+        with self.layout.canvas.before:
+            Color(0.5, 0.5, 1, 1)  # RGB-цвет (синий)
+            self.rect = Rectangle(size=self.layout.size, pos=self.layout.pos)
+
+        self.layout.bind(size=self._update_rect, pos=self._update_rect)
+        self.score = 0
+        self.current_question = 0
+        self.label = Label(text=Start().greet(), 
+               font_size = '25sp',)
+        self.layout.add_widget(self.label)
+
+        self.start_button = Button(text='Начать оценку', 
+            #    size_hint=(None, None),
+            #    size=(600, 50),
+               font_size = '20sp',
+               background_color=(1, 0, 1, 1), 
+               color=(1, 1, 1, 1))
+        self.start_button.bind(on_press=self.start_evaluation)
+        self.instruction_button = Button(text='Инструкция',
+            #    size_hint=(None, None),
+            #    size=(600, 50),
+               font_size = '20sp',
+               background_color=(1, 0, 1, 1), 
+               color=(1, 1, 1, 1))
+        self.instruction_button.bind(on_press=self.get_instruction)
+
+        self.layout.add_widget(self.start_button)
+        self.layout.add_widget(self.instruction_button)
+
+        return self.layout
+    
+    def _update_rect(self, *args):
+        self.rect.pos = self.layout.pos
+        self.rect.size = self.layout.size
+
+    def get_instruction(self, instance): #Показывает инструкции по использованию приложения.
+        self.label.text = Info().instruction()
+        self.layout.clear_widgets()
+        self.layout.add_widget(self.label)
+        back_button = Button(text='Назад',             
+            #    size_hint=(None, None),
+            #    size=(600, 50),
+               font_size = '20sp',
+               background_color=(1, 0, 1, 1), 
+               color=(1, 1, 1, 1))
+        back_button.bind(on_press=self.back_to_main)
+        self.layout.add_widget(back_button)
+
+    def back_to_main(self, instance): #Возвращает в самое начало программы, на главный экран.
+        self.layout.clear_widgets()
+        self.layout.add_widget(self.label)
+        self.layout.add_widget(self.start_button)
+        self.layout.add_widget(self.instruction_button)
+        self.label.text = Start().greet()
+
+    def start_evaluation(self, instance):
+        self.question_handler = Questions(self, self.label, self.layout)  # Создаем экземпляр Questions
+        self.question_handler.next_question()  # Начинаем с первого вопроса
+
+    def finalize(self): #Завершает оценивание и показывает общий балл.
+        from progs.result import Result
+        end = Result(self).get_result()
+        self.label.text = f'Общий балл: {end}'
+        self.layout.clear_widgets()
+        self.layout.add_widget(self.label)
+        restart_button = Button(text='Начать заново')
+        restart_button.bind(on_press=self.restart)
+        self.layout.add_widget(restart_button)
+    
+    def restart(self, instance):
+        """
+        Сбрасывает состояние приложения и возвращает пользователя на главный экран.
+
+        Параметры:
+        instance: Текущий экземпляр кнопки, которая вызвала это действие.
+        """
+        self.score = 0
+        self.current_question = 0
+        self.back_to_main(instance)
+
+
