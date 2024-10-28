@@ -89,6 +89,21 @@ class Silverman(App):
     def finalize(self): #Завершает оценивание и показывает общий балл.
         from progs.result import Result
         end = Result(self).get_result()
+        if 1<=self.score < 3:
+            with self.layout.canvas.before:
+                 Color(0, 1, 0, 1)
+                 self.rect = Rectangle(size=self.layout.size, pos=self.layout.pos)
+            self.layout.bind(size=self._update_rect, pos=self._update_rect)
+        elif 3<=self.score < 6:
+            with self.layout.canvas.before:
+                 Color(1, 1, 0, 1)
+                 self.rect = Rectangle(size=self.layout.size, pos=self.layout.pos)
+            self.layout.bind(size=self._update_rect, pos=self._update_rect)
+        elif 7<=self.score:
+            with self.layout.canvas.before:
+                 Color(1, 0, 0, 1)
+                 self.rect = Rectangle(size=self.layout.size, pos=self.layout.pos)
+            self.layout.bind(size=self._update_rect, pos=self._update_rect)
         self.label.text = f'Общий балл: {end}'
         self.layout.clear_widgets()
         self.layout.add_widget(self.label)
@@ -108,6 +123,11 @@ class Silverman(App):
         """
         self.score = 0
         self.current_question = 0
+        with self.layout.canvas.before:
+            Color(0.5, 0.5, 1, 1)  # RGB-цвет (синий)
+            self.rect = Rectangle(size=self.layout.size, pos=self.layout.pos)
+
+        self.layout.bind(size=self._update_rect, pos=self._update_rect)
         self.back_to_main(instance)
 
 

@@ -14,21 +14,21 @@ class Result:
 
         if 1 <= score < 3:
             result = (
-                  f'Cумма баллов {score}\n'
+                  f' {score}\n'
                   f'Начальные признаки синдрома дыхательных растройств')
             
             return result
 
         elif 3 <= score <= 6:
             result = (
-                  f'Cумма баллов {score}\n'
+                  f' {score}\n'
                   f'Средняя степень тяжести синдрома дыхательных расстройств')
             
             return result
 
         elif 7 <= score:
             result = (
-                      f'Cумма баллов {score}\n'
+                      f' {score}\n'
                       f'Тяжелый синдром дыхательных расстройств')
             
             
@@ -36,7 +36,7 @@ class Result:
 
         else:
             result = (
-                      f'Cумма баллов {score}\n'
+                      f' {score}\n'
                       f'Признаков дыхательных расстройств нет')
             
             return result
