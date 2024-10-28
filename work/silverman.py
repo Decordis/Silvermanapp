@@ -35,7 +35,7 @@ class Silverman(App):
         # self.layout.add_widget(img_rean)   Проблема с установкой фотки в левом углу!!!!!!! 
 
         self.label = Label(text=Start().greet(), 
-               font_size = '25sp',)
+               font_size = '25sp')
         self.layout.add_widget(self.label)
 
         self.start_button = Button(text='Начать оценку', 
@@ -104,13 +104,19 @@ class Silverman(App):
                  Color(1, 0, 0, 1)
                  self.rect = Rectangle(size=self.layout.size, pos=self.layout.pos)
             self.layout.bind(size=self._update_rect, pos=self._update_rect)
-        self.label.text = f'Общий балл: {end}'
+        
+        self.label=Label(
+            text=f'Общий балл:{end}',
+            font_size='25sp',
+            color=(0,0,0,1))
+        # self.label.text=f'Общий балл: {end}'
         self.layout.clear_widgets()
         self.layout.add_widget(self.label)
-        restart_button = Button(text='Начать заново',
-                font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1))
+        restart_button = Button(
+            text='Начать заново',
+            font_size = '20sp',
+            background_color=(1, 0, 1, 1), 
+            color=(1, 1, 1, 1))
         restart_button.bind(on_press=self.restart)
         self.layout.add_widget(restart_button)
     
