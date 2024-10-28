@@ -1,5 +1,6 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.graphics import Color, Rectangle, InstructionGroup
@@ -16,7 +17,7 @@ class Silverman(App):
         self.score = 0
         self.current_question = 0
 
-        self.layout = BoxLayout(orientation='vertical')        
+        self.layout = BoxLayout(orientation='vertical')      
 
         # Установка фона
         with self.layout.canvas.before:
@@ -25,9 +26,13 @@ class Silverman(App):
 
         self.layout.bind(size=self._update_rect, pos=self._update_rect)
 
-        img = Image(source='images/neon.png', size_hint=(None, None), size=(100, 100))
-        img.pos_hint = {'right': 1, 'top': 1}  # Позиционирование в верхнем углу
-        self.layout.add_widget(img)  # Добавляем изображение в макет
+        img_neon = Image(source='images/neon.png', size_hint=(None, None), size=(100, 100))
+        img_neon.pos_hint = {'right': 1, 'top': 1}  # Позиционирование в верхнем углу
+        self.layout.add_widget(img_neon)
+
+        # img_rean = Image(source='images/rean.png', size_hint=(None, None), size=(100, 100))
+        # img_rean.pos_hint = {'left': 0, 'top': 0}
+        # self.layout.add_widget(img_rean)   Проблема с установкой фотки в левом углу!!!!!!! 
 
         self.label = Label(text=Start().greet(), 
                font_size = '25sp',)
@@ -87,7 +92,10 @@ class Silverman(App):
         self.label.text = f'Общий балл: {end}'
         self.layout.clear_widgets()
         self.layout.add_widget(self.label)
-        restart_button = Button(text='Начать заново')
+        restart_button = Button(text='Начать заново',
+                font_size = '20sp',
+               background_color=(1, 0, 1, 1), 
+               color=(1, 1, 1, 1))
         restart_button.bind(on_press=self.restart)
         self.layout.add_widget(restart_button)
     
