@@ -1,20 +1,16 @@
-
-
 from kivy.uix.button import Button
 
 
 class Questions:
-  
     def __init__(self, app, label, layout):
         self.app = app
         self.label = label
         self.layout = layout
         self.score = app.score
-        self.current_question = app.current_question  # Здесь мы правильно сохраняем атрибут
+        # Здесь мы правильно сохраняем атрибут
+        self.current_question = app.current_question
 
     def next_question(self):
-        # print(f"Текущий вопрос: {self.current_question}") Включать, если нужна отладка
-        # print(f"Текущий балл: {self.app.score}")
         if self.current_question == 0:
             self.ask_thorax_question()
         elif self.current_question == 1:
@@ -29,99 +25,78 @@ class Questions:
             self.app.finalize()  # вызов finalize через app
 
     def ask_thorax_question(self):
-    # Устанавливаем текст и стиль для Label
+        # Устанавливаем текст и стиль для Label
         self.label.text = ('I. Оценка движения грудной клетки.'
                            '\nВыберите вариант:')
         self.label.font_size = '30sp'  # Размер шрифта
         self.label.color = (1, 1, 1, 1)  # Белый текст
-        
-
         self.layout.clear_widgets()
         self.layout.add_widget(self.label)
-
-        
         self.buttons_thorax = [
-        Button(text='0: Грудь и живот равномерно участвуют в акте дыхания',
-            #    size_hint=(0.8, 0.8),  
-               font_size = '20sp',
-            #    size=(100, 10),  
-               background_color=(1, 0, 1, 1),  
-               color=(1, 1, 1, 1)),  # Белый текст
-        Button(text='1: Аритмичное, неравномерное дыхание',
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1)),  # Белый текст
-        Button(text='2: Западение верхней части грудной клетки',
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1)),  # Белый текст
-    ]
+            Button(text='0: Грудь и живот равномерно участвуют в акте дыхания',
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1),
+                   color=(1, 1, 1, 1)),
+            Button(text='1: Аритмичное, неравномерное дыхание',
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1),
+                   color=(1, 1, 1, 1)),  
+            Button(text='2: Западение верхней части грудной клетки',
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1),
+                   color=(1, 1, 1, 1)),
+                   ]
         for button in self.buttons_thorax:
             button.bind(on_press=self.evaluate_thorax)
             self.layout.add_widget(button)
 
     def ask_riber_question(self):
         self.label.text = 'II. Оценка втяжения межреберных:\nВыберите вариант:'
-        self.label.font_size = '30sp'  # Размер шрифта
-        self.label.color = (1, 1, 1, 1)  # Белый текст
+        self.label.font_size = '30sp'  
+        self.label.color = (1, 1, 1, 1)  
         self.layout.clear_widgets()
         self.layout.add_widget(self.label)
 
         self.buttons_riber = [
             Button(text='0: Отсутствуют',
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1)),
-            Button(text='1: Легкое втяжение',            
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1)),
-            Button(text='2: Заметное втяжение',           
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1))
-        ]
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1),
+                   color=(1, 1, 1, 1)),
+            Button(text='1: Легкое втяжение',
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1),
+                   color=(1, 1, 1, 1)),
+            Button(text='2: Заметное втяжение',
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1),
+                   color=(1, 1, 1, 1))
+                   ]
 
         for button in self.buttons_riber:
             button.bind(on_press=self.evaluate_riber)
             self.layout.add_widget(button)
 
     def ask_xiphoid_question(self):
-        self.label.text = 'III. Оценка втяжения мечевидного отростка:\nВыберите вариант:'
-        self.label.font_size = '30sp'  # Размер шрифта
-        self.label.color = (1, 1, 1, 1)  # Белый текст
+        self.label.text = 'III. Оценка втяжения мечевидного отростка:'
+        '\n Выберите вариант:'
+        self.label.font_size = '30sp'
+        self.label.color = (1, 1, 1, 1)
         self.layout.clear_widgets()
         self.layout.add_widget(self.label)
 
         self.buttons_xiphoid = [
-            Button(text='0: Отсутствуют',             
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1)),
-            Button(text='1: Небольшое втяжение',           
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1)),
-            Button(text='2: Заметное втяжение',             
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1))
+            Button(text='0: Отсутствуют',
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1),
+                   color=(1, 1, 1, 1)),
+            Button(text='1: Небольшое втяжение',
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1), 
+                   color=(1, 1, 1, 1)),
+            Button(text='2: Заметное втяжение',
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1),
+                   color=(1, 1, 1, 1))
         ]
 
         for button in self.buttons_xiphoid:
@@ -130,31 +105,25 @@ class Questions:
 
     def ask_mandibula_question(self):
         self.label.text = 'IV. Положение нижней челюсти:\nВыберите вариант:'
-        self.label.font_size = '30sp'  # Размер шрифта
-        self.label.color = (1, 1, 1, 1)  # Белый текст
+        self.label.font_size = '30sp'
+        self.label.color = (1, 1, 1, 1)
         self.layout.clear_widgets()
         self.layout.add_widget(self.label)
 
         self.buttons_mandibula = [
             Button(text='0: Рот закрыт, нижняя челюсть не западает',
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1)),
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1), 
+                   color=(1, 1, 1, 1)),
             Button(text='1: Рот закрыт, опускание подбородка на вдохе',
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1)),
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1), 
+                   color=(1, 1, 1, 1)),
             Button(text='2: Рот открыт, опускание подбородка на вдохе',
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1))
-        ]
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1), 
+                   color=(1, 1, 1, 1))
+                   ]
 
         for button in self.buttons_mandibula:
             button.bind(on_press=self.evaluate_mandibula)
@@ -162,30 +131,24 @@ class Questions:
 
     def ask_breath_question(self):
         self.label.text = 'V. Звучность дыхания:\nВыберите вариант:'
-        self.label.font_size = '30sp'  # Размер шрифта
-        self.label.color = (1, 1, 1, 1)  # Белый текст
+        self.label.font_size = '30sp'
+        self.label.color = (1, 1, 1, 1)
         self.layout.clear_widgets()
         self.layout.add_widget(self.label)
 
         self.buttons_breath = [
-            Button(text='0: Дыхание спокойное, ровное', 
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1)),
+            Button(text='0: Дыхание спокойное, ровное',
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1), 
+                   color=(1, 1, 1, 1)),
             Button(text='1: Экспираторные шумы слышны при аускультации',
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1)),
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1), 
+                   color=(1, 1, 1, 1)),
             Button(text='2: Экспираторные шумы слышны на расстоянии',
-            #    size_hint=(None, None),
-            #    size=(600, 50),
-               font_size = '20sp',
-               background_color=(1, 0, 1, 1), 
-               color=(1, 1, 1, 1))
+                   font_size='20sp',
+                   background_color=(1, 0, 1, 1), 
+                   color=(1, 1, 1, 1))
         ]
 
         for button in self.buttons_breath:
