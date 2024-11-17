@@ -36,12 +36,12 @@ class Questions:
         # Создаем кнопки с увеличенными размерами
         self.buttons_thorax = [
             Button(text='0: Грудь и живот равномерно участвуют в акте дыхания',
-                   font_size='24sp',  # Увеличен размер шрифта
+                   font_size='24sp',
                    background_color=(1, 0, 1, 1),
                    color=(1, 1, 1, 1),
                    size_hint=(None, None),
                    size=(400, 60),  # Размер кнопки
-                   pos_hint={'center_x': 0.5, 'center_y': 0.5}),  # Центрирование
+                   pos_hint={'center_x': 0.5, 'center_y': 0.5}),
             Button(text='1: Аритмичное, неравномерное дыхание',
                    font_size='24sp',
                    background_color=(1, 0, 1, 1),
@@ -60,7 +60,6 @@ class Questions:
         for button in self.buttons_thorax:
             button.bind(on_press=self.evaluate_thorax)
             self.layout.add_widget(button)
-
         self.add_restart_button()
         self.add_get_main_button()
 
@@ -98,7 +97,6 @@ class Questions:
         for button in self.buttons_riber:
             button.bind(on_press=self.evaluate_riber)
             self.layout.add_widget(button)
-
         self.add_restart_button()
         self.add_get_main_button()
 
@@ -120,8 +118,8 @@ class Questions:
                    pos_hint={'center_x': 0.5, 'center_y': 0.5}),
             Button(text='1: Небольшое втяжение',
                    font_size='20sp',
-                   background_color=(1, 0, 1, 1), 
-                   color=(1, 1, 1, 1),                   
+                   background_color=(1, 0, 1, 1),
+                   color=(1, 1, 1, 1),
                    size_hint=(None, None),
                    size=(400, 60),
                    pos_hint={'center_x': 0.5, 'center_y': 0.4}),
@@ -174,8 +172,7 @@ class Questions:
 
         for button in self.buttons_mandibula:
             button.bind(on_press=self.evaluate_mandibula)
-            self.layout.add_widget(button)
-        
+            self.layout.add_widget(button)     
         self.add_restart_button()
         self.add_get_main_button()
 
@@ -260,7 +257,7 @@ class Questions:
             pos_hint={'center_x': 0.5, 'center_y': 0.2})
         restart_button.bind(on_press=self.restart_test)
         self.layout.add_widget(restart_button)
-    
+
     def add_get_main_button(self):
         restart_button = Button(
             text='Вернуться в меню',
@@ -272,7 +269,7 @@ class Questions:
             pos_hint={'center_x': 0.5, 'center_y': 0.1})
         restart_button.bind(on_press=self.get_main)
         self.layout.add_widget(restart_button)
-    
+
     def restart_test(self, instance):
         self.app.score = 0
         self.current_question = 0
@@ -280,4 +277,3 @@ class Questions:
 
     def get_main(self, instance):
         self.app.restart(instance)
-
