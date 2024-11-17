@@ -65,8 +65,8 @@ class Questions:
 
     def ask_riber_question(self):
         self.label.text = 'II. Оценка втяжения межреберных:\nВыберите вариант:'
-        self.label.font_size = '30sp'  
-        self.label.color = (1, 1, 1, 1)  
+        self.label.font_size = '30sp'
+        self.label.color = (1, 1, 1, 1)
         self.layout.clear_widgets()
         self.layout.add_widget(self.label)
 
@@ -149,7 +149,7 @@ class Questions:
         self.buttons_mandibula = [
             Button(text='0: Рот закрыт, нижняя челюсть не западает',
                    font_size='20sp',
-                   background_color=(1, 0, 1, 1), 
+                   background_color=(1, 0, 1, 1),
                    color=(1, 1, 1, 1),
                    size_hint=(None, None),
                    size=(400, 60),
@@ -157,14 +157,14 @@ class Questions:
             Button(text='1: Рот закрыт, опускание подбородка на вдохе',
                    font_size='20sp',
                    background_color=(1, 0, 1, 1),
-                   color=(1, 1, 1, 1),                   
+                   color=(1, 1, 1, 1),
                    size_hint=(None, None),
                    size=(400, 60),
                    pos_hint={'center_x': 0.5, 'center_y': 0.4}),
             Button(text='2: Рот открыт, опускание подбородка на вдохе',
                    font_size='20sp',
                    background_color=(1, 0, 1, 1),
-                   color=(1, 1, 1, 1),                   
+                   color=(1, 1, 1, 1),
                    size_hint=(None, None),
                    size=(400, 60),
                    pos_hint={'center_x': 0.5, 'center_y': 0.3})
@@ -172,7 +172,7 @@ class Questions:
 
         for button in self.buttons_mandibula:
             button.bind(on_press=self.evaluate_mandibula)
-            self.layout.add_widget(button)     
+            self.layout.add_widget(button)
         self.add_restart_button()
         self.add_get_main_button()
 
@@ -187,7 +187,7 @@ class Questions:
             Button(text='0: Дыхание спокойное, ровное',
                    font_size='20sp',
                    background_color=(1, 0, 1, 1),
-                   color=(1, 1, 1, 1),                   
+                   color=(1, 1, 1, 1),
                    size_hint=(None, None),
                    size=(400, 60),
                    pos_hint={'center_x': 0.5, 'center_y': 0.5}),
@@ -201,7 +201,7 @@ class Questions:
             Button(text='2: Экспираторные шумы слышны на расстоянии',
                    font_size='20sp',
                    background_color=(1, 0, 1, 1),
-                   color=(1, 1, 1, 1),                   
+                   color=(1, 1, 1, 1),
                    size_hint=(None, None),
                    size=(400, 60),
                    pos_hint={'center_x': 0.5, 'center_y': 0.3}),

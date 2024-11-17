@@ -47,7 +47,7 @@ class Silverman(App):
             background_color=(1, 0, 1, 1),
             color=(1, 1, 1, 1),
             size_hint=(None, None),
-            size=(400, 80),  
+            size=(400, 80),
             pos_hint={'center_x': 0.5, 'center_y': 0.5}
         )
         self.start_button.bind(on_press=self.start_evaluation)
@@ -57,7 +57,7 @@ class Silverman(App):
             background_color=(1, 0, 1, 1),
             color=(1, 1, 1, 1),
             size_hint=(None, None),
-            size=(400, 80),  
+            size=(400, 80),
             pos_hint={'center_x': 0.5, 'center_y': 0.4}
         )
         self.instruction_button.bind(on_press=self.get_instruction)
@@ -133,7 +133,7 @@ class Silverman(App):
         self.layout.add_widget(self.label)
         restart_button = Button(
             text='Начать заново',
-            font_size='24sp', 
+            font_size='24sp',
             background_color=(1, 0, 1, 1),
             color=(1, 1, 1, 1),
             size_hint=(None, None),
