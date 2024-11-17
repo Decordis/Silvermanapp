@@ -9,7 +9,6 @@ from work.questions import Questions
 from kivy.uix.image import Image
 
 
-
 class Silverman(App):
     """
     Основной класс приложения Silverman,
@@ -121,7 +120,6 @@ class Silverman(App):
                 Color(1, 0, 0, 1)  # Красный
                 self.rect = Rectangle(size=self.layout.size, pos=self.layout.pos)
             self.layout.bind(size=self._update_rect, pos=self._update_rect)
-
 
         self.label = Label(
             text=f'Общий балл: {end}',

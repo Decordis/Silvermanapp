@@ -257,4 +257,6 @@ class Questions:
         self.layout.add_widget(restart_button)
 
     def restart_test(self, instance):
-        self.ask_riber_question()
+        self.app.score = 0
+        self.current_question = 0
+        self.ask_thorax_question()
