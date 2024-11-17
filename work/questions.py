@@ -62,6 +62,7 @@ class Questions:
             self.layout.add_widget(button)
 
         self.add_restart_button()
+        self.add_get_main_button()
 
     def ask_riber_question(self):
         self.label.text = 'II. Оценка втяжения межреберных:\nВыберите вариант:'
@@ -99,6 +100,7 @@ class Questions:
             self.layout.add_widget(button)
 
         self.add_restart_button()
+        self.add_get_main_button()
 
     def ask_xiphoid_question(self):
         self.label.text = 'III. Оценка втяжения мечевидного отростка:'
@@ -137,6 +139,7 @@ class Questions:
             self.layout.add_widget(button)
 
         self.add_restart_button()
+        self.add_get_main_button()
 
     def ask_mandibula_question(self):
         self.label.text = 'IV. Положение нижней челюсти:\nВыберите вариант:'
@@ -174,6 +177,7 @@ class Questions:
             self.layout.add_widget(button)
         
         self.add_restart_button()
+        self.add_get_main_button()
 
     def ask_breath_question(self):
         self.label.text = 'V. Звучность дыхания:\nВыберите вариант:'
@@ -211,6 +215,7 @@ class Questions:
             self.layout.add_widget(button)
 
         self.add_restart_button()
+        self.add_get_main_button()
 
     def evaluate_thorax(self, instance):
         thorax_score = int(instance.text.split(':')[0])
@@ -255,8 +260,24 @@ class Questions:
             pos_hint={'center_x': 0.5, 'center_y': 0.2})
         restart_button.bind(on_press=self.restart_test)
         self.layout.add_widget(restart_button)
-
+    
+    def add_get_main_button(self):
+        restart_button = Button(
+            text='Вернуться в меню',
+            font_size='20sp',
+            background_color=(1, 0, 0, 1),
+            color=(1, 1, 1, 1),
+            size_hint=(None, None),
+            size=(400, 60),
+            pos_hint={'center_x': 0.5, 'center_y': 0.1})
+        restart_button.bind(on_press=self.get_main)
+        self.layout.add_widget(restart_button)
+    
     def restart_test(self, instance):
         self.app.score = 0
         self.current_question = 0
         self.ask_thorax_question()
+
+    def get_main(self, instance):
+        self.app.restart(instance)
+
