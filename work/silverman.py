@@ -6,6 +6,11 @@ from kivy.graphics import Color, Rectangle
 from progs.texts import Start, Info
 from work.questions import Questions
 from kivy.uix.image import Image
+# from kivy.config import Config
+
+# Config.set('graphics', 'resizable', 0)
+# Config.set('graphics', 'width', 720)
+# Config.set('graphics', 'height',  1280)
 
 
 class Silverman(App):
@@ -29,15 +34,15 @@ class Silverman(App):
             size_hint=(None, None),
             size=(150, 150)  # Увеличен размер изображения
         )
-        img_neon.pos_hint = {'right': 1, 'top': 1}  # В верхнем углу
+        img_neon.pos_hint = {'right': 1, 'top': 0.92}  # В верхнем углу
         self.layout.add_widget(img_neon)
 
         self.label = Label(
             text=Start().greet(),
-            font_size='30sp',
+            font_size='10sp',
             size_hint=(None, None),
-            size=(400, 50),
-            pos_hint={'center_x': 0.5, 'top': 0.85}  # Центрирование
+            size=(100, 50),
+            pos_hint={'center_x': 0.5, 'top': 0.8}  # Центрирование
         )
         self.layout.add_widget(self.label)
 
