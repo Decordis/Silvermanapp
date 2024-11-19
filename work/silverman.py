@@ -43,6 +43,14 @@ class Silverman(App):
         )
         img_rean.pos_hint = {'left': 0, 'top': 1}
 
+        img_lung = Image(
+            source='images/lung.png',
+            size_hint=(None, None),
+            size=(150, 150)  # Увеличен размер изображения
+        )
+        img_lung.pos_hint = {'left': 0, 'bottom': 0}
+
+        self.layout.add_widget(img_lung)
         self.layout.add_widget(img_rean)
         self.layout.add_widget(img_neon)
 
