@@ -21,7 +21,7 @@ class Silverman(App):
     def build(self):  # Создает основное окно с виджетами.
         self.score = 0
         self.current_question = 0
-        self.layout = FloatLayout()
+        self.layout = FloatLayout(size_hint=(1, 1))
 
         # Установка фона
         with self.layout.canvas.before:
@@ -34,7 +34,16 @@ class Silverman(App):
             size_hint=(None, None),
             size=(150, 150)  # Увеличен размер изображения
         )
-        img_neon.pos_hint = {'right': 1, 'top': 0.92}  # В верхнем углу
+        img_neon.pos_hint = {'right': 1, 'top': 1}  # В верхнем углу
+
+        img_rean = Image(
+            source='images/rean.png',
+            size_hint=(None, None),
+            size=(150, 150)  # Увеличен размер изображения
+        )
+        img_rean.pos_hint = {'left': 0, 'top': 1}
+
+        self.layout.add_widget(img_rean)
         self.layout.add_widget(img_neon)
 
         self.label = Label(
